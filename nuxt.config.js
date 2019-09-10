@@ -27,6 +27,12 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    {
+      src: "~/plugins/vue-validate.js"
+    },
+    // {
+    //   src: "~/plugins/v2Datepicker.js"
+    // }
   ],
   /*
   ** Nuxt.js dev-modules
