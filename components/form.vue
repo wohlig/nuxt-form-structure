@@ -8,30 +8,227 @@
             <div class="tab-heading inception">
               <h3 class="text">Personal Details</h3>
             </div>
-                 <!-- first name -->
-            <b-form-group label="First Name:" label-for="firstName">
-              <b-form-input
-                id="firstName"
-                type="text"
-                required
-                placeholder="Enter First Name"
-              ></b-form-input>
-              <!-- <div
+              <div class="form-content">
+               <!-- first name -->
+              <b-form-group label="First Name:" label-for="firstName">
+                <b-form-input
+                  id="firstName"
+                  type="text"
+                  v-model="form.firstName"
+                  required
+                  placeholder="Enter First Name"
+                ></b-form-input>
+              <div
                 v-if="$v.form.firstName.$error && !$v.form.firstName.required"
                 class="error-txt"
               >
                 first name is required
-              </div> -->
+              </div>
             </b-form-group>
+             <!-- middle name -->
+            <b-form-group label="Middle Name:" label-for="middleName">
+              <b-form-input
+                id="middleName"
+                type="text"
+                v-model="form.middleName"
+                required
+                placeholder="Enter Last Name"
+              ></b-form-input>
+              <div
+                v-if="$v.form.middleName.$error && !$v.form.middleName.required"
+                class="error-txt"
+              >
+                first name is required
+              </div>
+            </b-form-group>
+
+            <!-- last name -->
+            <b-form-group label="Last Name:" label-for="lastName">
+              <b-form-input
+                id="lastName"
+                type="text"
+                v-model="form.lastName"
+                required
+                placeholder="Enter Last Name"
+              ></b-form-input>
+              <div
+                v-if="$v.form.lastName.$error && !$v.form.lastName.required"
+                class="error-txt"
+              >
+                first name is required
+              </div>
+            </b-form-group>
+
+            <!-- gender -->
+            <b-form-group label="Select Gender">
+              <div class="d-flex">
+                <div>
+                  <b-form-radio
+                   v-model="form.selectedGender"
+                    name="some-radios"
+                    value="A"
+                    >Male</b-form-radio
+                  >
+                </div>
+                <div class="ml-5">
+                  <b-form-radio
+                  v-model="form.selectedGender"
+                    name="some-radios"
+                    value="B"
+                    >Female</b-form-radio
+                  >
+                </div>
+              </div>
+              <div
+                v-if="
+                  $v.form.selectedGender.$error &&
+                    !$v.form.selectedGender.required
+                "
+                class="error-txt"
+              >
+                gender is required
+              </div>
+            </b-form-group>
+
+            <!-- date -->
+            <b-form-group label="age" label-for="age">
+              <div class="d-flex w-100">
+                <div class="w-50">
+                  <b-form-group
+                    class
+                    id="calendar"
+                    name="calendar"
+                    label="Date Of Birth"
+                    required
+                  >
+                    <!-- <date-picker
+                      v-model="form.dob"
+                      v-on:change="selectDate(form.dob)"
+                      type="number"
+                      :lang="'es'"
+                      :first-day-of-week="1"
+                      :format="'YYYY-MM-DD'"
+                      class
+                      :placeholder="'Select Date'"
+                    ></date-picker> -->
+                    <datetime v-model="date"></datetime>
+                  </b-form-group>
+                </div>
+                <div class="ml-4 w-50">
+                  <b-form-group label="age" label-for="age">
+                    <b-form-input
+                      id="age"
+                      type="text"
+                      v-model="form.dob"
+                      required
+                      placeholder="age"
+                    ></b-form-input>
+                  </b-form-group>
+                </div>
+                <div class="form-infonote">
+                    Kindly enter the date of birth mentioned on your Aadhar card/ Pan Card/ Birth Certificate
+                  </div>
+              </div>
+              <div
+                v-if="$v.form.dob.$error && !$v.form.dob.required"
+                class="error-txt"
+              >
+                first select date
+              </div>
+
+            </b-form-group>
+
+            <!-- password -->
+            <b-form-group label="Create Password" label-for="password">
+              <b-form-input
+                id="password"
+                type="password"
+                v-model="form.password"
+                required
+                placeholder="Minimum 8 Characters"
+              ></b-form-input>
+              <div
+                v-if="$v.form.password.$error && !$v.form.password.required"
+                class="error-txt"
+              >
+                password is required
+              </div>
+            </b-form-group>
+
+            <!-- Confirm Password-->
+            <b-form-group label="Confirm Password" label-for="Confirm Password">
+              <b-form-input
+                id="confirm-password"
+                type="password"
+                v-model="form.password"
+                required
+                placeholder="Re-enter Password to Confirm Password"
+              ></b-form-input>
+              <div
+                v-if="$v.form.password.$error && !$v.form.password.required"
+                class="error-txt"
+              >
+                password is required
+              </div>
+            </b-form-group>
+
+            <!-- mobile no -->
+            <b-form-group label="Mobile No" label-for="mobileNO">
+              <b-form-input
+                id="mobileNO"
+                type="number"
+                v-model="form.mobileNO"
+                required
+                placeholder="Enter Mobile no  "
+              ></b-form-input>
+              <div
+                v-if="$v.form.mobileNO.$error && !$v.form.mobileNO.required"
+                class="error-txt"
+              >
+                mobile no is required
+              </div>
+            </b-form-group>
+
+            <!-- email -->
+            <b-form-group label="Email" label-for="email">
+              <b-form-input
+                id="email"
+                type="email"
+                v-model="form.email"
+                required
+                placeholder="Enter Email"
+              ></b-form-input>
+              <div
+                v-if="$v.form.email.$error && !$v.form.email.required"
+                class="error-txt"
+              >
+                gmail is required
+              </div>
+            </b-form-group>
+            </div>
           </div>
+ <!-- subnit and reset button -->
+            <div>
+              <b-button
+                type="submit"
+                v-on:click="onSubmit(form)"
+                to="#"
+                variant="primary"
+                >Submit</b-button
+              >
+              <b-button class="ml-4" type="reset" variant="danger"
+                >Reset</b-button
+              >
+            </div>
           <!-- Personal Details End-->
           <!-- School Details -->
           <div class="card inception">
             <div class="tab-heading inception">
               <h3 class="text">School Details</h3>
             </div>
-                 <!-- first name -->
-            <b-form-group label="First Name:" label-for="firstName">
+            <div class="form-content">
+               <!-- first name -->
+              <b-form-group label="First Name:" label-for="firstName">
               <b-form-input
                 id="firstName"
                 type="text"
@@ -45,6 +242,9 @@
                 first name is required
               </div> -->
             </b-form-group>
+            </div>
+
+
           </div>
           <!-- School Details End-->
         </b-form>
@@ -53,8 +253,137 @@
   </div>
 </template>
 <script>
+import { required } from "vuelidate/lib/validators";
 export default {
+  data() {
+    return {
+      show: true,
+      errors: [],
+      bootstrapBtnPromise: "",
+      submitStatus: "true",
 
+      form: {
+        firstName: "",
+        middleName: "",
+        lastName: "",
+        selectedGender: "",
+        email: "",
+        password: "",
+        dob: "",
+        age: "",
+        mobileNO: "",
+        checked: []
+      },
+
+      // date picker script
+      selectedGender: "",
+      value: "",
+      time1: "",
+      time2: "",
+      time3: "",
+      // custom lang
+      lang: {
+        days: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+        months: [
+          "Jan",
+          "Feb",
+          "Mar",
+          "Apr",
+          "May",
+          "Jun",
+          "Jul",
+          "Aug",
+          "Sep",
+          "Oct",
+          "Nov",
+          "Dec"
+        ],
+        pickers: [
+          "next 7 days",
+          // "next 30 days",
+          "previous 7 days",
+          "previous 30 days"
+        ]
+      },
+      // custom range shortcuts
+      shortcuts: [
+        {
+          text: "Today",
+          onClick: () => {
+            this.time3 = [new Date(), new Date()];
+          }
+        }
+      ],
+
+      foods: [
+        { text: "Select One", value: null },
+        "Carrots",
+        "Beans",
+        "Tomatoes",
+        "Corn"
+      ]
+    };
+  },
+  validations: {
+    form: {
+      firstName: {
+        required
+      },
+      lastName: {
+        required
+      },
+      middleName: {
+        required
+      },
+      selectedGender: {
+        required
+      },
+      email: {
+        required
+      },
+      password: {
+        required
+      },
+      dob: {
+        required
+      },
+      mobileNO: {
+        required
+      }
+    }
+  },
+   methods: {
+    onSubmit() {
+      this.$v.form.$touch();
+      if (this.$v.form.$error) {
+        return;
+      }
+    },
+
+    onReset(evt) {
+      evt.preventDefault();
+      // Reset our form values
+      this.form.firstName = "";
+      this.form.middleName = "";
+      this.form.lastName = "";
+      this.form.selectedGender = "";
+      this.form.email = "";
+      this.form.password = "";
+      this.form.dob = "";
+      this.form.age = "";
+      this.form.mobileNO = "";
+      this.form.checked = [];
+      // Trick to reset/clear native browser form validation state
+      this.show = true;
+      this.$nextTick(() => {
+        this.show = true;
+      });
+    },
+    selectDate: function(value) {
+      this.form.age =
+        moment(new Date()).format("YYYY") - moment(value).format("YYYY");
+    }
+  }
 }
 </script>
 
@@ -63,12 +392,16 @@ export default {
 .error-txt {
   color: red;
 }
-
-.main-form-section {
-  color: black !important;
+.form-infonote {
+    padding: 8px;
+    color: #757575;
+    background-color: #e5e5e5;
+    font-style: italic;
+    font-size: 12px;
 }
 .column{
   .main-form-section{
+     color: black !important;
     .card {
       font-size: 1.1rem;
       font-weight: 400;
@@ -151,6 +484,9 @@ export default {
             text-shadow: 1rem 0 0.4rem black;
           }
         }
+      }
+      .form-content{
+        margin:0 2rem;
       }
     }
   }
