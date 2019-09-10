@@ -1,105 +1,85 @@
 <template>
-  <div class="Header header header-1 bgcover" >
-        <div class="container">
-            <b-navbar toggleable="lg" type="dark">
-                <b-navbar-brand href="/" >
-                    <img src="~/assets/Images/logo-wohlig.png" alt="Wohlig">
-                </b-navbar-brand>
-                <b-navbar-toggle target="nav-collapse"><span aria-hidden="true" class="icon_menu hamb-mob-icon "></span></b-navbar-toggle>
-                <b-collapse id="nav-collapse" is-nav>
-                <!-- Right aligned nav items -->
-                <b-navbar-nav class="ml-auto font-montserrat ">
-                    <b-navbar-nav  v-for="nav in Navigations" v-bind:key="nav.index"
-                            :to="nav.to">
-                        <b-nav-item class="current">{{nav.title}}</b-nav-item>
-                    </b-navbar-nav>
-                </b-navbar-nav>
-                </b-collapse>
-            </b-navbar>
-        </div>
-    </div>
+  <div class="">
+    <nav class="navbar">
+      <div class="trapezoid lime pullUp">
+        <a href="#">Home</a>
+        <a href="#" class="expandHome">About</a>
+        <a href="#">Contact Us</a>
+        <a href="#">Skills</a>
+      </div>
+    </nav>
+  </div>
 </template>
 
 <script>
-export default {
-    data(){
-        return{
-            Navigations:[
-                {
-                    link:"#Home",
-                    title:"Home",
-                    to: '/'
-
-                },
-                 {
-                    link:"#about-us",
-                    title:"About Us",
-                    to: '/about-us'
-                },
-                 {
-                    link:"#services",
-                    title:"Services",
-                    to: '/services'
-                },
-                 {
-                    link:"#work-process",
-                    title:"Work Process",
-                    to: '/work-process'
-                },
-                 {
-                    link:"#clients",
-                    title:"Clients",
-                    to: '/clients'
-                },
-                {
-                    link:"#contact-us",
-                    title:"Contact",
-                    to: '/contact-us'
-                }
-            ]
-        }
-    },
-
-
-
-}
+export default {};
 </script>
 
-<style>
-.navbar-dark .navbar-nav .nav-link {
-    color:#323336;
-    font-size: 17px;
-    padding: 22px;
+<style lang="scss">
+.trapezoid {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 0;
+  border: 80px solid rgba(0, 0, 0, 0);
+  border-top: 0 solid;
+  border-bottom: 100px solid rgba(1, 1, 1, 0.4);
+  -webkit-border-radius: 20px 20px 0 0;
+  border-radius: 20px 20px 0 0;
+  font: normal 100% / normal Arial, Helvetica, sans-serif;
+  color: rgba(0, 0, 0, 0.7);
+  -o-text-overflow: clip;
+  text-overflow: clip;
+  -webkit-transform: rotateX(180deg);
+  transform: rotateX(180deg);
+  margin-top: -72px;
+  width: 700px;
+  position: relative;
+  transition: all 0.7s ease;
+  padding-left: 7%;
 }
-.navbar-brand>img{
-    height: 42px;
+
+.trapezoid a {
+  -webkit-transform: rotateX(180deg);
+  transform: rotateX(180deg);
 }
-.navbar-dark .navbar-nav .nav-link:hover{
-    color: #323336;
+
+.navbar {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  overflow: hidden;
+  justify-content: center;
+  height: 100px;
+  z-index: 2;
 }
-.navbar-dark .navbar-nav .nav-link:focus{
-    color: #fff;
+
+div.pullUp a:before {
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  left: 0px;
+  bottom: 0px;
+  content: "";
+  background: #fff;
+  opacity: 0.3;
+  transition: all 0.3s;
 }
-.navbar-dark .navbar-toggler {
-    color: #323336;
-    border-color: #323336;
+
+div.pullUp a:hover:before {
+  height: 100%;
 }
-.navbar-dark .navbar-toggler {
-    color: #323336;
-    border:0;
-}
-button:focus{
-    outline: 0;
-}
-@media (max-width: 1024px){
-.hamb-mob-icon {
-    padding: 0px;
-    }
-.main-menu-container{
-    background-image: linear-gradient( to right,rgba(48,172,177,1),rgba(115,173,39,1) );
-}
-.bgcover{
-    box-shadow: none;
-}
+
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 25px;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  transition: all 0.5s ease;
+  margin: 5px;
 }
 </style>

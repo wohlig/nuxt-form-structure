@@ -27,15 +27,15 @@
   </div>
 </template>
 <style lang="scss">
-.banner-section{
-  // position: absolute;
+/* .banner-section{ */
+  /* // position: absolute;
   // right: 0;
   // margin: 20px;
   // max-width: 300px;
   // padding: 16px;
-  // color: white;
+  // color: white; */
 
-    .section-tab {
+  .section-tab {
     padding: 8px 25px 8px 30px;
     margin-right: 25px;
     background-color: #0a1a72;
@@ -45,7 +45,7 @@
     font-size: 18px;
     font-weight: 700;
     text-transform: capitalize;
-}
+  }
 .section-tab:after {
     content: '';
     position: absolute;
@@ -61,7 +61,7 @@
     box-shadow: 0 0 10px 5px #e1e1e1;
     margin-bottom: 40px;
 }
-}
+/* } */
 .animated {
   animation-duration: 2.5s;
   animation-fill-mode: both;
