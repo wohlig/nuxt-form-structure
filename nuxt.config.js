@@ -30,6 +30,9 @@ export default {
     {
       src: "~/plugins/vue-validate.js"
     },
+    {
+      src: "~/plugins/v-select.js"
+    },
     // {
     //   src: "~/plugins/v2Datepicker.js"
     // }

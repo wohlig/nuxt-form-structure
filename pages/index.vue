@@ -18,10 +18,13 @@ export default {
   }
 };
 </script>
-<style type="scss">
+<style lang="scss">
 .main-background {
       background-image: linear-gradient(90deg,rgba(48,172,177,.8),rgba(115,173,39,.8)),
     url("~@/assets/Images/office-space.jpg");
+/*
+    background-image: linear-gradient(90deg,rgba(48,172,177,.8),rgba(115,173,39,.8)),
+    url("~@/assets/Images/girl.jpg"); */
   height: 100vh;
   position: fixed;
   width: 100%;

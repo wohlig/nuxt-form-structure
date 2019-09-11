@@ -92,8 +92,9 @@
 
             <!-- date -->
             <b-form-group label="age" label-for="age">
-              <div class="d-flex w-100">
-                <div class="w-50">
+              <div class="row">
+                <div class="col-sm-8 d-flex">
+                  <div class="w-50">
                   <b-form-group
                     class
                     id="calendar"
@@ -125,9 +126,12 @@
                     ></b-form-input>
                   </b-form-group>
                 </div>
-                <div class="form-infonote">
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-infonote">
                     Kindly enter the date of birth mentioned on your Aadhar card/ Pan Card/ Birth Certificate
                   </div>
+                </div>
               </div>
               <div
                 v-if="$v.form.dob.$error && !$v.form.dob.required"
@@ -137,41 +141,49 @@
               </div>
 
             </b-form-group>
+            <div class="row">
+              <div class="col-md-8 ">
+              <!-- password -->
+                        <b-form-group label="Create Password" label-for="password">
+                          <b-form-input
+                            id="password"
+                            type="password"
+                            v-model="form.password"
+                            required
+                            placeholder="Minimum 8 Characters"
+                          ></b-form-input>
+                          <div
+                            v-if="$v.form.password.$error && !$v.form.password.required"
+                            class="error-txt"
+                          >
+                            password is required
+                          </div>
+                        </b-form-group>
 
-            <!-- password -->
-            <b-form-group label="Create Password" label-for="password">
-              <b-form-input
-                id="password"
-                type="password"
-                v-model="form.password"
-                required
-                placeholder="Minimum 8 Characters"
-              ></b-form-input>
-              <div
-                v-if="$v.form.password.$error && !$v.form.password.required"
-                class="error-txt"
-              >
-                password is required
-              </div>
-            </b-form-group>
+                        <!-- Confirm Password-->
+                        <b-form-group label="Confirm Password" label-for="Confirm Password">
+                          <b-form-input
+                            id="confirm-password"
+                            type="password"
+                            v-model="form.password"
+                            required
+                            placeholder="Re-enter Password"
+                          ></b-form-input>
+                          <div
+                            v-if="$v.form.password.$error && !$v.form.password.required"
+                            class="error-txt"
+                          >
+                            password is required
+                          </div>
+                        </b-form-group>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="form-infonote">
+                          You will need this password to login, check and edit sport details (if required). The password must be kept confidential.
+                      </div>
+                    </div>
 
-            <!-- Confirm Password-->
-            <b-form-group label="Confirm Password" label-for="Confirm Password">
-              <b-form-input
-                id="confirm-password"
-                type="password"
-                v-model="form.password"
-                required
-                placeholder="Re-enter Password to Confirm Password"
-              ></b-form-input>
-              <div
-                v-if="$v.form.password.$error && !$v.form.password.required"
-                class="error-txt"
-              >
-                password is required
-              </div>
-            </b-form-group>
-
+            </div>
             <!-- mobile no -->
             <b-form-group label="Mobile No" label-for="mobileNO">
               <b-form-input
@@ -247,6 +259,42 @@
 
           </div>
           <!-- School Details End-->
+          <!-- Upload Document -->
+          <div class="card inception">
+            <div class="tab-heading inception">
+              <h3 class="text">Upload Document</h3>
+            </div>
+            <div class="form-content">
+              <div class="row">
+                <!-- School ID -->
+                <div class="col-md-8">
+                  <label for="" class="control-label">*Upload Age Proof:</label>
+                  <b-form-file v-model="file2" class="mt-3" plain  accept=".jpg, .png, .gif"></b-form-file>
+                  <!-- <div class="mt-3">Selected file: {{ file2 ? file2.name : '' }} -->
+                    <!-- <img :src="file2 ? file2.name : ''" height="160" /> -->
+                  <!-- </div> -->
+                </div>
+                <div class="col-md-4">
+                  <div class="form-infonote">
+                    Kindly upload your most recent School ID or Report Card. This is to verify that you are an athlete from the selected school.
+                    Kindly upload only .jpg or .png format. Maximum file size 5MB
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-8">
+                  <label for="" class="control-label">*Upload Age Proof:</label>
+                  <v-select v-model="selected" :options="['Vue.js','React']"></v-select>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-infonote">For age verification</div>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+          <!-- Upload Document End -->
         </b-form>
       </div>
     </div>
@@ -257,6 +305,7 @@ import { required } from "vuelidate/lib/validators";
 export default {
   data() {
     return {
+      file2: null,
       show: true,
       errors: [],
       bootstrapBtnPromise: "",
@@ -487,6 +536,16 @@ export default {
       }
       .form-content{
         margin:0 2rem;
+      }
+      .btn-upload {
+        background-color: transparent;
+        color: rgb(10, 26, 114);
+        border-color: rgb(10, 26, 114);
+      }
+      .btn-upload:hover {
+        color: rgb(255, 255, 255);
+        background-color: rgb(92, 184, 92);
+        border-color: rgb(92, 184, 92);
       }
     }
   }

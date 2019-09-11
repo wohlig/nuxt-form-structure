@@ -16,7 +16,9 @@
     "css-font-family": "^1.0.7",
     "node-sass": "^4.12.0",
     "nuxt": "^2.0.0",
-    "sass-loader": "^8.0.0"
+    "sass-loader": "^8.0.0",
+    "vue-select": "^3.1.0",
+    "vuelidate": "^0.7.4"
   },
   "devDependencies": {}
 }
