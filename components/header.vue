@@ -16,6 +16,7 @@ export default {};
 </script>
 
 <style lang="scss">
+@import '~assets/scss/main.scss';
 .trapezoid {
   -webkit-box-sizing: content-box;
   -moz-box-sizing: content-box;
@@ -61,7 +62,7 @@ div.pullUp a:before {
   left: 0px;
   bottom: 0px;
   content: "";
-  background: #fff;
+  background: $white;
   opacity: 0.3;
   transition: all 0.3s;
 }
@@ -73,7 +74,7 @@ div.pullUp a:hover:before {
 .navbar a {
   float: left;
   font-size: 16px;
-  color: white;
+  color: $white;
   text-align: center;
   padding: 14px 25px;
   text-decoration: none;

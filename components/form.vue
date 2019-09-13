@@ -5,8 +5,8 @@
         <b-form name="form">
           <!-- Personal Details -->
           <div class="card inception">
-            <div class="tab-heading inception">
-              <h3 class="text">Personal Details</h3>
+            <div class="tab-heading tab-heading-one inception">
+              <h3 class="text animated-scrolling-function-one">Personal Details</h3>
             </div>
               <div class="form-content">
                <!-- first name -->
@@ -60,7 +60,7 @@
             </b-form-group>
 
             <!-- gender -->
-            <b-form-group label="Select Gender">
+            <b-form-group label="Select Gender:">
               <div class="d-flex">
                 <div>
                   <b-form-radio
@@ -91,7 +91,7 @@
             </b-form-group>
 
             <!-- date -->
-            <b-form-group label="age" label-for="age">
+            <b-form-group>
               <div class="row">
                 <div class="col-sm-8 d-flex">
                   <div class="w-50">
@@ -99,7 +99,7 @@
                     class
                     id="calendar"
                     name="calendar"
-                    label="Date Of Birth"
+                    label="Date Of Birth:"
                     required
                   >
                     <!-- <date-picker
@@ -116,7 +116,7 @@
                   </b-form-group>
                 </div>
                 <div class="ml-4 w-50">
-                  <b-form-group label="age" label-for="age">
+                  <b-form-group label="age:" label-for="age">
                     <b-form-input
                       id="age"
                       type="text"
@@ -144,7 +144,7 @@
             <div class="row">
               <div class="col-md-8 ">
               <!-- password -->
-                        <b-form-group label="Create Password" label-for="password">
+                        <b-form-group label="Create Password:" label-for="password">
                           <b-form-input
                             id="password"
                             type="password"
@@ -161,7 +161,7 @@
                         </b-form-group>
 
                         <!-- Confirm Password-->
-                        <b-form-group label="Confirm Password" label-for="Confirm Password">
+                        <b-form-group label="Confirm Password:" label-for="Confirm Password">
                           <b-form-input
                             id="confirm-password"
                             type="password"
@@ -185,7 +185,7 @@
 
             </div>
             <!-- mobile no -->
-            <b-form-group label="Mobile No" label-for="mobileNO">
+            <b-form-group label="Mobile No:" label-for="mobileNO">
               <b-form-input
                 id="mobileNO"
                 type="number"
@@ -202,7 +202,7 @@
             </b-form-group>
 
             <!-- email -->
-            <b-form-group label="Email" label-for="email">
+            <b-form-group label="Email:" label-for="email">
               <b-form-input
                 id="email"
                 type="email"
@@ -219,57 +219,98 @@
             </b-form-group>
             </div>
           </div>
- <!-- subnit and reset button -->
-            <div>
-              <b-button
-                type="submit"
-                v-on:click="onSubmit(form)"
-                to="#"
-                variant="primary"
-                >Submit</b-button
-              >
-              <b-button class="ml-4" type="reset" variant="danger"
-                >Reset</b-button
-              >
-            </div>
           <!-- Personal Details End-->
           <!-- School Details -->
           <div class="card inception">
-            <div class="tab-heading inception">
-              <h3 class="text">School Details</h3>
+            <div class=" tab-heading tab-heading-two inception">
+              <h3 class="text animated-scrolling-function-two">School Details</h3>
             </div>
             <div class="form-content">
                <!-- first name -->
-              <b-form-group label="First Name:" label-for="firstName">
-              <b-form-input
-                id="firstName"
-                type="text"
-                required
-                placeholder="Enter First Name"
-              ></b-form-input>
-              <!-- <div
-                v-if="$v.form.firstName.$error && !$v.form.firstName.required"
+              <b-form-group label="School Name:" label-for="firstName">
+              <v-select v-model="form.SchoolName" label="text" :options="schoolOptions" placeholder="Select School Name"></v-select>
+              <div
+                v-if="$v.form.SchoolName.$error && !$v.form.SchoolName.required"
                 class="error-txt"
               >
-                first name is required
-              </div> -->
+                school name is required
+              </div>
+            </b-form-group>
+            <!--Address section  -->
+
+            <b-form-group label="Residential Address:" label-for>
+              <b-form-textarea
+                id="textarea"
+                v-model="form.Address"
+                placeholder="Enter Residential Address..."
+                rows="3"
+                max-rows="6"
+                class="scroll-color"
+              ></b-form-textarea>
+              <div
+                v-if="$v.form.Address.$error && !$v.form.Address.required"
+                class="error-txt"
+              >
+                Address is required
+              </div>
+            </b-form-group>
+            <!-- state input -->
+            <b-form-group label="State:" label-for="state">
+              <v-select
+                placeholder="Select state"
+                v-model="form.state"
+                label="text"
+                class="v-select"
+                :options="stateOptions"
+              ></v-select>
+              <div
+                v-if="$v.form.state.$error && !$v.form.state.required"
+                class="error-txt"
+              >
+                State is required
+              </div>
+            </b-form-group>
+            <!-- city input -->
+            <b-form-group label="City:" label-for="city">
+              <!-- <multiselect
+                v-model="form.city"
+                tag-placeholder="Add this as new tag"
+                placeholder="Search or add a tag"
+                label="name"
+                track-by="code"
+                class="w-50"
+                :options="options"
+                :multiple="true"
+                :taggable="true"
+                @tag="addTag"
+              ></multiselect> -->
+              <div
+                v-if="$v.form.city.$error && !$v.form.city.required"
+                class="error-txt"
+              >
+                State is required
+              </div>
             </b-form-group>
             </div>
-
-
           </div>
           <!-- School Details End-->
           <!-- Upload Document -->
           <div class="card inception">
-            <div class="tab-heading inception">
-              <h3 class="text">Upload Document</h3>
+            <div class=" tab-heading tab-heading-three inception">
+              <h3 class="text animated-scrolling-function-four">Upload Document</h3>
             </div>
             <div class="form-content">
               <div class="row">
                 <!-- School ID -->
                 <div class="col-md-8">
-                  <label for="" class="control-label">*Upload Age Proof:</label>
-                  <b-form-file v-model="file2" class="mt-3" plain  accept=".jpg, .png, .gif"></b-form-file>
+                  <label for="" class="control-label">*Upload School ID Proof:</label>
+                  <b-form-file v-model="form.file2" class="mt-3" plain  accept=".jpg, .png, .gif"></b-form-file>
+                  <div
+                    v-if="$v.form.file2.$error && !$v.form.file2.required"
+                    class="error-txt"
+                  >
+                    School ID Proof is required
+                  </div>
                   <!-- <div class="mt-3">Selected file: {{ file2 ? file2.name : '' }} -->
                     <!-- <img :src="file2 ? file2.name : ''" height="160" /> -->
                   <!-- </div> -->
@@ -284,24 +325,198 @@
               <div class="row mt-3">
                 <div class="col-md-8">
                   <label for="" class="control-label">*Upload Age Proof:</label>
-                  <v-select v-model="selected" :options="['Vue.js','React']"></v-select>
+                  <v-select v-model="form.ageProof"  label="text" :options="ageProof" class="v-select"></v-select>
+                  <div
+                    v-if="$v.form.ageProof.$error && !$v.form.ageProof.required"
+                    class="error-txt"
+                  >
+                    Age Proof is required
+                  </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-infonote">For age verification</div>
                 </div>
               </div>
+              <div class="row mt-3">
+                <div class="col-md-8">
+                  <label for="" class="control-label">*Upload Address Proof:</label>
+                  <b-form-file
+                    v-model="form.file"
+                    :state="Boolean(file)"
+                    placeholder="Choose a file or drop it here..."
+                    drop-placeholder="Drop file here...">
+                  </b-form-file>
+                  <div
+                    v-if="$v.form.file.$error && !$v.form.file.required"
+                    class="error-txt"
+                  >
+                    Address Proof is required
+                  </div>
+                </div>
+                <div class="col-md-4">
+                   <div class="form-infonote">For address verification</div>
+                </div>
+              </div>
             </div>
-
-
           </div>
           <!-- Upload Document End -->
+          <!-- Bank Details -->
+          <div class="card inception">
+            <div class="tab-heading tab-heading-three inception">
+              <h3 class="text animated-scrolling-function-three">Bank Details </h3>
+            </div>
+            <div class="form-content">
+              <div class="row">
+                <div class="col-md-8">
+                  <!-- Bank Name -->
+                  <b-form-group label="Bank Name:" label-for="Bank Name">
+                    <v-select
+                      placeholder="Select Bank Name"
+                      v-model="form.bankName"
+                      label="text"
+                      class="v-select"
+                      :options="bankNameOptions"
+                    ></v-select>
+                    <div
+                      v-if="$v.form.bankName.$error && !$v.form.bankName.required"
+                      class="error-txt"
+                    >
+                      Bank Name is required
+                    </div>
+                  </b-form-group>
+                  <!-- Bank Name End -->
+                </div>
+                <div class="col-md-4">
+                </div>
+              </div>
+              <!-- Card number -->
+              <div class="row mt-3">
+                <div class="col-md-8">
+                  <b-form-group label="*Card number:">
+                    <the-mask
+                      :mask="['#### #### #### ####']"
+                      type="text"
+                      id="cardNumber"
+                      name="cardNumber"
+                      placeholder="Enter Card Number"
+                      class="mask-input"
+                      v-model="form.cardNumber"
+                      required
+                    />
+                    <div class="error-txt" v-if="$v.form.cardNumber.$error && !$v.form.cardNumber.required">Card Number required</div>
+                </b-form-group>
+                </div>
+                <div class="col-md-4">
+                   <div class="form-infonote">Kindly enter the 16 Digits bank Card Number</div>
+                </div>
+              </div>
+              <!-- Card Number End -->
+              <!-- Date of Expiry -->
+              <div class="row mt-3">
+                <div class="col-md-8">
+                  <b-form-group label="*Date of Expiry:">
+                    <the-mask
+                        :mask="['##/##']"
+                        type="text"
+                        id="dateOfExpiry"
+                        name="dateOfExpiry"
+                        placeholder="00/00"
+                        class="mask-input"
+                        v-model="form.dateOfExpiry"
+                        required
+                        :maxlength="5"
+                      />
+                       <div class="error-txt" v-if="$v.form.dateOfExpiry.$error && !$v.form.dateOfExpiry.required">Card Number required</div>
+                  </b-form-group>
+                </div>
+                <div class="col-md-4">
+                </div>
+              </div>
+              <!-- Date of Expiry End -->
+              <!-- CVV -->
+              <div class="row mt-3">
+                <div class="col-md-8">
+                  <b-form-group label="*CVV:">
+                    <the-mask
+                        :mask="['###']"
+                        type="password"
+                        id="cvv"
+                        name="cvv"
+                        placeholder="CVV"
+                        class="mask-input"
+                        v-model="form.cvv"
+                        :maxlength="3"
+                        required
+                      />
+                    <div class="error-txt" v-if="$v.form.cvv.$error && !$v.form.cvv.required">Card Number required</div>
+                  </b-form-group>
+                </div>
+                <div class="col-md-4">
+
+                </div>
+              </div>
+              <!-- CVV End-->
+            </div>
+          </div>
+          <!-- Bank Details End -->
+          <!-- Submit Section -->
+            <div class="card inception">
+              <div class="tab-heading tab-heading-three inception">
+                <h3 class="text animated-scrolling-function-five">Submit Section</h3>
+              </div>
+              <div class="form-content">
+                <div class="row">
+                  <div class="col-md-8">
+                    <label for="" class="control-label">*Terms & Conditions:</label>
+                    <div>
+                      To continue accept our terms and conditions, loan agreement and privacy policy.
+                    </div>
+                    <b-form-group class="sms-checkbox">
+                      <b-form-checkbox-group
+                        id="flavour1a"
+                        name="flavour1a"
+                        required
+                        v-model="form.flavour1a"
+                        :options="termsOptions"
+                      ></b-form-checkbox-group>
+                    </b-form-group>
+                    <div
+                      class="error-txt"
+                      v-if="$v.form.flavour1a.$error && !$v.form.flavour1a.required"
+                    >
+                      Select atleast one is mandatory
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                  </div>
+                </div>
+                 <!-- submit and reset button -->
+                <div class="text-center pb-5 mb-5">
+                  <b-button
+                    type="submit"
+                    v-on:click="onSubmit(form)"
+                    to="#"
+                    variant="primary"
+                    >Submit</b-button
+                  >
+                  <b-button class="ml-4" type="reset" variant="danger"
+                    >Reset</b-button
+                  >
+                </div>
+              </div>
+            </div>
+          <!-- Terms and Conditions -->
+          <!-- Terms and Conditions End -->
+          <!-- Submit Section End -->
+
+
         </b-form>
       </div>
     </div>
   </div>
 </template>
 <script>
-import { required } from "vuelidate/lib/validators";
+import { required, minLength, maxLength} from "vuelidate/lib/validators";
 export default {
   data() {
     return {
@@ -310,7 +525,45 @@ export default {
       errors: [],
       bootstrapBtnPromise: "",
       submitStatus: "true",
-
+      schoolOptions: [
+              { value: "", text: "Select Documents" },
+              { value: "a", text: "kt vidyalaya" },
+              { value: "b", text: "saraswati vidyalaya" },
+              { value: "c", text: "diva vidyalaya" },
+              { value: "d", text: "don bosko high school" },
+              { value: "e", text: "vikas high school" },
+              { value: "f", text: "jk hight school" }
+      ],
+         termsOptions: [
+        { text: "sms", value: "SMS" },
+        { text: "email", value: "Email" },
+        { text: "phone", value:"Phone" }
+      ],
+      ageProof:[
+        { value: "", text: "Select Documents"},
+        {value: "aadharCard", text:"Aadhar Card"},
+        { value: "birthCert", text:"Birth Certificate + Photo ID"},
+        { value: "panCard", text:"PAN Card"},
+        { value: "passport", text:"Passport"},
+      ],
+      stateOptions: [
+        { value: "", text: "Select State" },
+        { value: "a", text: "Maharashtra" },
+        { value: "b", text: "Gujrat" },
+        { value: "c", text: "Bihar" },
+        { value: "d", text: "Rajstan" },
+        { value: "e", text: "Ranchi" },
+        { value: "f", text: "Madya Pradesh" }
+      ],
+      bankNameOptions:[
+        { value: "", text: "Select Bank Name" },
+        { value: "a", text: "Axis Bank" },
+        { value: "b", text: "ICICI Bank" },
+        { value: "c", text: "HDFC Bank" },
+        { value: "d", text: "State Bank of India" },
+        { value: "e", text: "Dena Bank" },
+        { value: "f", text: "Hitesh Bank" }
+      ],
       form: {
         firstName: "",
         middleName: "",
@@ -321,39 +574,21 @@ export default {
         dob: "",
         age: "",
         mobileNO: "",
+        SchoolName:"",
+        Address:"",
+        state:"",
+        required:"",
+        ageProof:"",
+        file:"",
+        file2:"",
+        cardNumber:"",
+        bankName:"",
+        dateOfExpiry:"",
+        cvv:"",
+        flavour1a:"",
         checked: []
       },
 
-      // date picker script
-      selectedGender: "",
-      value: "",
-      time1: "",
-      time2: "",
-      time3: "",
-      // custom lang
-      lang: {
-        days: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-        months: [
-          "Jan",
-          "Feb",
-          "Mar",
-          "Apr",
-          "May",
-          "Jun",
-          "Jul",
-          "Aug",
-          "Sep",
-          "Oct",
-          "Nov",
-          "Dec"
-        ],
-        pickers: [
-          "next 7 days",
-          // "next 30 days",
-          "previous 7 days",
-          "previous 30 days"
-        ]
-      },
       // custom range shortcuts
       shortcuts: [
         {
@@ -363,14 +598,6 @@ export default {
           }
         }
       ],
-
-      foods: [
-        { text: "Select One", value: null },
-        "Carrots",
-        "Beans",
-        "Tomatoes",
-        "Corn"
-      ]
     };
   },
   validations: {
@@ -397,6 +624,44 @@ export default {
         required
       },
       mobileNO: {
+        required
+      },
+      SchoolName:{
+        required
+      },
+      Address:{
+        required
+      },
+      state:{
+        required
+      },
+      city:{
+        required
+      },
+      ageProof:{
+        required
+      },
+      file2:{
+        required
+      },
+      file:{
+        required
+      },
+      cardNumber:{
+        required,
+        minLength: minLength(16),
+        // maxLength: maxLength(19)
+      },
+      bankName:{
+        required
+      },
+      dateOfExpiry:{
+        required
+      },
+      cvv:{
+        required
+      },
+      flavour1a:{
         required
       }
     }
@@ -437,10 +702,48 @@ export default {
 </script>
 
 <style lang="scss">
+
 @import '~assets/scss/main.scss';
 .error-txt {
-  color: red;
+  color:$red;
 }
+// .scroll-color::-webkit-scrollbar-track {
+//   border: 1px solid $black;
+//   padding: 2px 0;
+//   background-color: transparent;
+// }
+
+// .scroll-color::-webkit-scrollbar {
+//   width: 10px;
+// }
+
+// .scroll-color::-webkit-scrollbar-thumb {
+//   border-radius: 10px;
+//   // box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+//   background-color: transparent;
+//   // border: 1px solid #000;
+// }
+.animated-scrolling-function-one {
+  -webkit-animation: ps  50s infinite; /* Safari 4.0 - 8.0 */
+  animation: ps 50s infinite;
+}
+.animated-scrolling-function-two {
+ -webkit-animation: sd  50s infinite; /* Safari 4.0 - 8.0 */
+  animation: sd 50s infinite;
+}
+.animated-scrolling-function-three {
+  -webkit-animation: ud  50s infinite; /* Safari 4.0 - 8.0 */
+  animation: ud 50s infinite;
+}
+.animated-scrolling-function-four {
+  -webkit-animation: bd  50s infinite; /* Safari 4.0 - 8.0 */
+  animation: bd 50s infinite;
+}
+.animated-scrolling-function-five {
+  -webkit-animation: su  50s infinite; /* Safari 4.0 - 8.0 */
+  animation: su 50s infinite;
+}
+
 .form-infonote {
     padding: 8px;
     color: #757575;
@@ -448,9 +751,26 @@ export default {
     font-style: italic;
     font-size: 12px;
 }
+.v-select{
+  width: 50%;
+  border: 1px solid black;
+  border-radius: 4px;
+}
+.mask-input{
+    margin: 0;
+    display: block;
+    width: 100%;
+    padding: .375rem .75rem;
+    font-weight: 400;
+    line-height: 1.5;
+     background-color: transparent;
+    background-clip: padding-box;
+    border: 1px solid black;
+    border-radius: 4px;
+}
 .column{
   .main-form-section{
-     color: black !important;
+     color:$black;
     .card {
       font-size: 1.1rem;
       font-weight: 400;
