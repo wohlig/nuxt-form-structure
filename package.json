@@ -16,7 +16,9 @@
     "css-font-family": "^1.0.7",
     "node-sass": "^4.12.0",
     "nuxt": "^2.0.0",
+    "nuxt-vue-multiselect": "^1.0.4",
     "sass-loader": "^8.0.0",
+    "vue-multiselect": "^2.1.6",
     "vue-select": "^3.1.0",
     "vue-the-mask": "^0.11.1",
     "vuelidate": "^0.7.4"

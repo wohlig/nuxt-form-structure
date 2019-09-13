@@ -51,6 +51,8 @@ export default {
   modules: [
     // Doc: https://bootstrap-vue.js.org/docs/
     'bootstrap-vue/nuxt',
+    'nuxt-vue-multiselect'
+
   ],
   /*
   ** Build configuration

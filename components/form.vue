@@ -272,18 +272,16 @@
             </b-form-group>
             <!-- city input -->
             <b-form-group label="City:" label-for="city">
-              <!-- <multiselect
+              <multiselect
                 v-model="form.city"
                 tag-placeholder="Add this as new tag"
                 placeholder="Search or add a tag"
                 label="name"
                 track-by="code"
-                class="w-50"
-                :options="options"
+                class="w-50 v-select"
+                :options="cityOptions"
                 :multiple="true"
-                :taggable="true"
-                @tag="addTag"
-              ></multiselect> -->
+              ></multiselect>
               <div
                 v-if="$v.form.city.$error && !$v.form.city.required"
                 class="error-txt"
@@ -369,7 +367,7 @@
               <div class="row">
                 <div class="col-md-8">
                   <!-- Bank Name -->
-                  <b-form-group label="Bank Name:" label-for="Bank Name">
+                  <b-form-group label="*Bank Name:" label-for="Bank Name">
                     <v-select
                       placeholder="Select Bank Name"
                       v-model="form.bankName"
@@ -465,6 +463,7 @@
                 <h3 class="text animated-scrolling-function-five">Submit Section</h3>
               </div>
               <div class="form-content">
+                 <!-- Terms and Conditions -->
                 <div class="row">
                   <div class="col-md-8">
                     <label for="" class="control-label">*Terms & Conditions:</label>
@@ -490,6 +489,7 @@
                   <div class="col-md-4">
                   </div>
                 </div>
+                <!-- Terms and Conditions End -->
                  <!-- submit and reset button -->
                 <div class="text-center pb-5 mb-5">
                   <b-button
@@ -506,7 +506,7 @@
               </div>
             </div>
           <!-- Terms and Conditions -->
-          <!-- Terms and Conditions End -->
+
           <!-- Submit Section End -->
 
 
@@ -521,6 +521,8 @@ export default {
   data() {
     return {
       file2: null,
+      date:null,
+      file:null,
       show: true,
       errors: [],
       bootstrapBtnPromise: "",
@@ -533,6 +535,15 @@ export default {
               { value: "d", text: "don bosko high school" },
               { value: "e", text: "vikas high school" },
               { value: "f", text: "jk hight school" }
+      ],
+      cityOptions:[
+        { name: "thane", code: "vu" },
+        { name: "kanjur", code: "45" },
+        { name: "bhandup", code: "55" },
+        { name: "nahur", code: "53" },
+        { name: "mulund", code: "12" },
+        { name: "badlapur", code: "12" },
+        { name: "diva", code: "22" }
       ],
          termsOptions: [
         { text: "sms", value: "SMS" },
@@ -702,7 +713,6 @@ export default {
 </script>
 
 <style lang="scss">
-
 @import '~assets/scss/main.scss';
 .error-txt {
   color:$red;
@@ -753,8 +763,16 @@ export default {
 }
 .v-select{
   width: 50%;
-  border: 1px solid black;
+  border: 1px solid $black;
   border-radius: 4px;
+}
+.multiselect__tags{
+  background-color: transparent;
+  .multiselect__placeholder{
+    color: #576462;
+    line-height: 1.4;
+    font-size: 1em;
+  }
 }
 .mask-input{
     margin: 0;
