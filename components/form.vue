@@ -774,6 +774,7 @@ export default {
     font-size: 1em;
   }
 }
+
 .mask-input{
     margin: 0;
     display: block;

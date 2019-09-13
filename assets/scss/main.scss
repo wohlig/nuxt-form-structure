@@ -3,7 +3,7 @@
 @import "~assets/scss/scrolling-animated.scss";
 .form-control {
   background-color: transparent;
-  border: 1px solid black;
+  border: 1px solid $black;
   box-shadow: none;
   width: 50%;
 
@@ -12,3 +12,27 @@
       color: rgba(10, 10, 10, 0.863) !important;
       opacity: 0.7;
     }
+  .custom-file .custom-file-label{
+    background-color: transparent;
+}
+.custom-file-input.is-invalid ~ .custom-file-label {
+  border-color:$black;
+}
+.custom-file-input.is-invalid:focus ~ .custom-file-label {
+  border-color: $black;
+  box-shadow: none;
+}
+.custom-file-label::after {
+  content: "Browse file";
+  background-color:transparent;
+}
+// .custom-control-label::after {
+//   // background-color:transparent;
+//   background: no-repeat 50% / 50% 50% transparent;
+// }
+// .custom-file-input ~ .custom-file-label[data-browse]::after {
+//   content: attr(data-BrowseData);
+// }
+
+
+
