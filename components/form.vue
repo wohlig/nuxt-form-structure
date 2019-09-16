@@ -38,7 +38,7 @@
                 v-if="$v.form.middleName.$error && !$v.form.middleName.required"
                 class="error-txt"
               >
-                first name is required
+                middle name is required
               </div>
             </b-form-group>
 
@@ -55,7 +55,7 @@
                 v-if="$v.form.lastName.$error && !$v.form.lastName.required"
                 class="error-txt"
               >
-                first name is required
+                last name is required
               </div>
             </b-form-group>
 
@@ -148,33 +148,39 @@
                           <b-form-input
                             id="password"
                             type="password"
+                            name="password"
                             v-model="form.password"
                             required
                             placeholder="Minimum 8 Characters"
                           ></b-form-input>
                           <div
-                            v-if="$v.form.password.$error && !$v.form.password.required"
+                            v-if="$v.form.password.$error"
                             class="error-txt"
                           >
-                            password is required
+                          <span v-if="!$v.form.password.required">Password is required</span>
+                          <span v-if="!$v.form.password.minLength">Password must be at least 8 characters</span>
                           </div>
                         </b-form-group>
 
                         <!-- Confirm Password-->
                         <b-form-group label="Confirm Password:" label-for="Confirm Password">
                           <b-form-input
-                            id="confirm-password"
+                            id="confirmPassword"
                             type="password"
-                            v-model="form.password"
+                            name="confirmPassword"
+                            v-model="form.confirmPassword"
                             required
                             placeholder="Re-enter Password"
                           ></b-form-input>
                           <div
-                            v-if="$v.form.password.$error && !$v.form.password.required"
+                            v-if="$v.form.confirmPassword.$error"
                             class="error-txt"
                           >
-                            password is required
+                           <span v-if="!$v.form.confirmPassword.required">  Confirm Password is required</span>
+                            <span v-else-if="!$v.form.confirmPassword.sameAsPassword">Passwords must match</span>
+
                           </div>
+
                         </b-form-group>
                     </div>
                     <div class="col-sm-4">
@@ -516,7 +522,7 @@
   </div>
 </template>
 <script>
-import { required, minLength, maxLength} from "vuelidate/lib/validators";
+import { required, minLength, maxLength ,email, sameAs} from "vuelidate/lib/validators";
 export default {
   data() {
     return {
@@ -582,6 +588,7 @@ export default {
         selectedGender: "",
         email: "",
         password: "",
+        confirmPassword:"",
         dob: "",
         age: "",
         mobileNO: "",
@@ -626,16 +633,23 @@ export default {
         required
       },
       email: {
-        required
+        required,email
       },
       password: {
-        required
+        required,
+        minLength: minLength(8)
+      },
+      confirmPassword:{
+        required,
+        sameAsPassword: sameAs('password')
       },
       dob: {
         required
       },
       mobileNO: {
-        required
+        required,
+        min: minLength(9),
+        max: maxLength(9)
       },
       SchoolName:{
         required
@@ -681,8 +695,10 @@ export default {
     onSubmit() {
       this.$v.form.$touch();
       if (this.$v.form.$error) {
+        this.$toaster.error('Please fill all details.')
         return;
       }
+      this.$toaster.success('Successfully registration done.')
     },
 
     onReset(evt) {

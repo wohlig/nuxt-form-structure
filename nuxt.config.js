@@ -36,6 +36,9 @@ export default {
     {
       src: "~/plugins/vue-input-mask.js"
     },
+    {
+      src: "~/plugins/v-toaster.js"
+    },
     // {
     //   src: "~/plugins/v2Datepicker.js"
     // }
