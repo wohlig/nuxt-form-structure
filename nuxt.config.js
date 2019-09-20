@@ -39,6 +39,13 @@ export default {
     {
       src: "~/plugins/v-toaster.js"
     },
+    {
+      src:"~plugins/vue-datepicker.js",
+      ssr: false
+    },
+    {
+      src:"~plugins/vue-moment.js"
+    }
     // {
     //   src: "~/plugins/v2Datepicker.js"
     // }

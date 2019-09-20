@@ -19,7 +19,8 @@
                   placeholder="Enter First Name"
                 ></b-form-input>
               <div
-                v-if="$v.form.firstName.$error && !$v.form.firstName.required"
+                v-if="$v.form.firstName.$error && !$v.form.firstName.required &&
+                    removeText"
                 class="error-txt"
               >
                 first name is required
@@ -35,7 +36,8 @@
                 placeholder="Enter Last Name"
               ></b-form-input>
               <div
-                v-if="$v.form.middleName.$error && !$v.form.middleName.required"
+                v-if="$v.form.middleName.$error && !$v.form.middleName.required &&
+                    removeText"
                 class="error-txt"
               >
                 middle name is required
@@ -52,7 +54,8 @@
                 placeholder="Enter Last Name"
               ></b-form-input>
               <div
-                v-if="$v.form.lastName.$error && !$v.form.lastName.required"
+                v-if="$v.form.lastName.$error && !$v.form.lastName.required &&
+                    removeText"
                 class="error-txt"
               >
                 last name is required
@@ -82,7 +85,8 @@
               <div
                 v-if="
                   $v.form.selectedGender.$error &&
-                    !$v.form.selectedGender.required
+                    !$v.form.selectedGender.required &&
+                    removeText
                 "
                 class="error-txt"
               >
@@ -102,6 +106,22 @@
                     label="Date Of Birth:"
                     required
                   >
+                    <no-ssr>
+                      <datepicker
+                      v-model="form.dob"
+                      v-on:change="selectDate(form.dob)"
+                       type="number"
+                      :lang="'en'"
+                      :first-day-of-week="1"
+                      :format="'dd-MM-yyyy'"
+                      :placeholder="'Select your Date of Birth'"
+                      class="mb-5 datepicker"
+                      name="birth-date"
+                      id="birth-date"
+                      input-class="datepicker-input"
+                      calendar-class="datepicker-calendar"
+                      ></datepicker>
+                    </no-ssr>
                     <!-- <date-picker
                       v-model="form.dob"
                       v-on:change="selectDate(form.dob)"
@@ -112,7 +132,6 @@
                       class
                       :placeholder="'Select Date'"
                     ></date-picker> -->
-                    <datetime v-model="date"></datetime>
                   </b-form-group>
                 </div>
                 <div class="ml-4 w-50">
@@ -134,7 +153,8 @@
                 </div>
               </div>
               <div
-                v-if="$v.form.dob.$error && !$v.form.dob.required"
+                v-if="$v.form.dob.$error && !$v.form.dob.required &&
+                    removeText"
                 class="error-txt"
               >
                 first select date
@@ -154,7 +174,7 @@
                             placeholder="Minimum 8 Characters"
                           ></b-form-input>
                           <div
-                            v-if="$v.form.password.$error"
+                            v-if="$v.form.password.$error && removeText"
                             class="error-txt"
                           >
                           <span v-if="!$v.form.password.required">Password is required</span>
@@ -173,7 +193,7 @@
                             placeholder="Re-enter Password"
                           ></b-form-input>
                           <div
-                            v-if="$v.form.confirmPassword.$error"
+                            v-if="$v.form.confirmPassword.$error && removeText"
                             class="error-txt"
                           >
                            <span v-if="!$v.form.confirmPassword.required">  Confirm Password is required</span>
@@ -196,14 +216,19 @@
                 id="mobileNO"
                 type="number"
                 v-model="form.mobileNO"
+                :maxlength="10"
+                :minlength="10"
                 required
                 placeholder="Enter Mobile no  "
               ></b-form-input>
               <div
-                v-if="$v.form.mobileNO.$error && !$v.form.mobileNO.required"
+                v-if="$v.form.mobileNO.$error && removeText"
                 class="error-txt"
               >
+              <span v-if="!$v.form.mobileNO.required ">
                 mobile no is required
+              </span>
+              <span v-if="!$v.form.mobileNO.minLength">mobile number must be 10 digits</span>
               </div>
             </b-form-group>
 
@@ -217,7 +242,7 @@
                 placeholder="Enter Email"
               ></b-form-input>
               <div
-                v-if="$v.form.email.$error && !$v.form.email.required"
+                v-if="$v.form.email.$error && !$v.form.email.required && removeText"
                 class="error-txt"
               >
                 gmail is required
@@ -236,7 +261,7 @@
               <b-form-group label="School Name:" label-for="firstName">
               <v-select v-model="form.SchoolName" label="text" :options="schoolOptions" placeholder="Select School Name"></v-select>
               <div
-                v-if="$v.form.SchoolName.$error && !$v.form.SchoolName.required"
+                v-if="$v.form.SchoolName.$error && !$v.form.SchoolName.required && removeText"
                 class="error-txt"
               >
                 school name is required
@@ -254,7 +279,7 @@
                 class="scroll-color"
               ></b-form-textarea>
               <div
-                v-if="$v.form.Address.$error && !$v.form.Address.required"
+                v-if="$v.form.Address.$error && !$v.form.Address.required && removeText"
                 class="error-txt"
               >
                 Address is required
@@ -270,7 +295,7 @@
                 :options="stateOptions"
               ></v-select>
               <div
-                v-if="$v.form.state.$error && !$v.form.state.required"
+                v-if="$v.form.state.$error && !$v.form.state.required && removeText"
                 class="error-txt"
               >
                 State is required
@@ -289,7 +314,7 @@
                 :multiple="true"
               ></multiselect>
               <div
-                v-if="$v.form.city.$error && !$v.form.city.required"
+                v-if="$v.form.city.$error && !$v.form.city.required && removeText"
                 class="error-txt"
               >
                 State is required
@@ -310,7 +335,7 @@
                   <label for="" class="control-label">*Upload School ID Proof:</label>
                   <b-form-file v-model="form.file2" class="mt-3" plain  accept=".jpg, .png, .gif"></b-form-file>
                   <div
-                    v-if="$v.form.file2.$error && !$v.form.file2.required"
+                    v-if="$v.form.file2.$error && !$v.form.file2.required && removeText"
                     class="error-txt"
                   >
                     School ID Proof is required
@@ -331,7 +356,7 @@
                   <label for="" class="control-label">*Upload Age Proof:</label>
                   <v-select v-model="form.ageProof"  label="text" :options="ageProof" class="v-select"></v-select>
                   <div
-                    v-if="$v.form.ageProof.$error && !$v.form.ageProof.required"
+                    v-if="$v.form.ageProof.$error && !$v.form.ageProof.required && removeText"
                     class="error-txt"
                   >
                     Age Proof is required
@@ -351,7 +376,7 @@
                     drop-placeholder="Drop file here...">
                   </b-form-file>
                   <div
-                    v-if="$v.form.file.$error && !$v.form.file.required"
+                    v-if="$v.form.file.$error && !$v.form.file.required && removeText"
                     class="error-txt"
                   >
                     Address Proof is required
@@ -382,7 +407,7 @@
                       :options="bankNameOptions"
                     ></v-select>
                     <div
-                      v-if="$v.form.bankName.$error && !$v.form.bankName.required"
+                      v-if="$v.form.bankName.$error && !$v.form.bankName.required && removeText"
                       class="error-txt"
                     >
                       Bank Name is required
@@ -407,7 +432,10 @@
                       v-model="form.cardNumber"
                       required
                     />
-                    <div class="error-txt" v-if="$v.form.cardNumber.$error && !$v.form.cardNumber.required">Card Number required</div>
+                    <div class="error-txt" v-if="$v.form.cardNumber.$error && removeText">
+                      <span v-if="!$v.form.cardNumber.required ">Card Number required</span>
+                      <span v-if="!$v.form.password.minLength">Card Number must be at least 8 characters</span>
+                      </div>
                 </b-form-group>
                 </div>
                 <div class="col-md-4">
@@ -430,7 +458,7 @@
                         required
                         :maxlength="5"
                       />
-                       <div class="error-txt" v-if="$v.form.dateOfExpiry.$error && !$v.form.dateOfExpiry.required">Card Number required</div>
+                       <div class="error-txt" v-if="$v.form.dateOfExpiry.$error && !$v.form.dateOfExpiry.required && removeText">Card Number required</div>
                   </b-form-group>
                 </div>
                 <div class="col-md-4">
@@ -452,7 +480,7 @@
                         :maxlength="3"
                         required
                       />
-                    <div class="error-txt" v-if="$v.form.cvv.$error && !$v.form.cvv.required">Card Number required</div>
+                    <div class="error-txt" v-if="$v.form.cvv.$error && !$v.form.cvv.required && removeText">Card Number required</div>
                   </b-form-group>
                 </div>
                 <div class="col-md-4">
@@ -487,7 +515,7 @@
                     </b-form-group>
                     <div
                       class="error-txt"
-                      v-if="$v.form.flavour1a.$error && !$v.form.flavour1a.required"
+                      v-if="$v.form.flavour1a.$error && !$v.form.flavour1a.required && removeText"
                     >
                       Select atleast one is mandatory
                     </div>
@@ -505,7 +533,8 @@
                     variant="primary"
                     >Submit</b-button
                   >
-                  <b-button class="ml-4" type="reset" variant="danger"
+                  <b-button class="ml-4" type="reset"
+                    v-on:click="ResetBtn()" variant="danger"
                     >Reset</b-button
                   >
                 </div>
@@ -521,7 +550,10 @@
     </div>
   </div>
 </template>
+<script src="https://unpkg.com/vue"></script>
+<script src="https://unpkg.com/vuejs-datepicker"></script>
 <script>
+import VueMoment from "vue-moment";
 import { required, minLength, maxLength ,email, sameAs} from "vuelidate/lib/validators";
 export default {
   data() {
@@ -530,6 +562,7 @@ export default {
       date:null,
       file:null,
       show: true,
+      removeText: "true",
       errors: [],
       bootstrapBtnPromise: "",
       submitStatus: "true",
@@ -674,7 +707,7 @@ export default {
       },
       cardNumber:{
         required,
-        minLength: minLength(16),
+        minLength: minLength(8)
         // maxLength: maxLength(19)
       },
       bankName:{
@@ -692,7 +725,11 @@ export default {
     }
   },
    methods: {
+     ResetBtn() {
+      this.removeText = false;
+    },
     onSubmit() {
+      this.removeText = true;
       this.$v.form.$touch();
       if (this.$v.form.$error) {
         this.$toaster.error('Please fill all details.')
@@ -732,6 +769,15 @@ export default {
 @import '~assets/scss/main.scss';
 .error-txt {
   color:$red;
+}
+.datepicker-input{
+    background-color: transparent;
+    border: 1px solid $black;
+    box-shadow: none;
+    border-radius: 0.25rem;
+    height: calc(1.5em + 0.75rem + 2px);
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
 }
 // .scroll-color::-webkit-scrollbar-track {
 //   border: 1px solid $black;
@@ -800,7 +846,7 @@ export default {
     line-height: 1.5;
      background-color: transparent;
     background-clip: padding-box;
-    border: 1px solid black;
+    border: 1px solid $black;
     border-radius: 4px;
 }
 .column{
@@ -885,7 +931,7 @@ export default {
             color: transparent;
             font-size: 1.7rem;
             font-weight: 900;
-            text-shadow: 1rem 0 0.4rem black;
+            text-shadow: 1rem 0 0.4rem $black;
           }
         }
       }
@@ -894,13 +940,13 @@ export default {
       }
       .btn-upload {
         background-color: transparent;
-        color: rgb(10, 26, 114);
-        border-color: rgb(10, 26, 114);
+        color: $btn-upload-blue;
+        border-color: $btn-upload-blue;
       }
       .btn-upload:hover {
-        color: rgb(255, 255, 255);
-        background-color: rgb(92, 184, 92);
-        border-color: rgb(92, 184, 92);
+        color: $btn-upload-white;
+        background-color: $btn-upload-green;
+        border-color: $btn-upload-green;
       }
     }
   }
