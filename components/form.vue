@@ -10,7 +10,7 @@
             </div>
               <div class="form-content">
                <!-- first name -->
-              <b-form-group label="First Name:" label-for="firstName">
+              <b-form-group label="First Name:" label-for="firstName" >
                 <b-form-input
                   id="firstName"
                   type="text"
@@ -234,18 +234,22 @@
 
             <!-- email -->
             <b-form-group label="Email:" label-for="email">
-              <b-form-input
-                id="email"
+              <input
                 type="email"
+                id="email"
+                class="form-control"
                 v-model="form.email"
+                pattern=".+@gmail.com"
                 required
                 placeholder="Enter Email"
-              ></b-form-input>
+               @click="emailTouch()"
+              >
               <div
-                v-if="$v.form.email.$error && !$v.form.email.required && removeText"
+                v-if="$v.form.email.$error && removeText"
                 class="error-txt"
               >
-                gmail is required
+              <span v-if="!$v.form.email.required ">gmail is required</span>
+              <span v-if="!$v.form.email.email">Email is invalid</span>
               </div>
             </b-form-group>
             </div>
@@ -354,7 +358,8 @@
               <div class="row mt-3">
                 <div class="col-md-8">
                   <label for="" class="control-label">*Upload Age Proof:</label>
-                  <v-select v-model="form.ageProof"  label="text" :options="ageProof" class="v-select"></v-select>
+                  <v-select v-model="form.ageProof"  label="text" :options="ageProof"
+                    placeholder="Select Document" class="v-select"></v-select>
                   <div
                     v-if="$v.form.ageProof.$error && !$v.form.ageProof.required && removeText"
                     class="error-txt"
@@ -567,7 +572,7 @@ export default {
       bootstrapBtnPromise: "",
       submitStatus: "true",
       schoolOptions: [
-              { value: "", text: "Select Documents" },
+              // { value: "", text: "Select Documents" },
               { value: "a", text: "kt vidyalaya" },
               { value: "b", text: "saraswati vidyalaya" },
               { value: "c", text: "diva vidyalaya" },
@@ -590,14 +595,14 @@ export default {
         { text: "phone", value:"Phone" }
       ],
       ageProof:[
-        { value: "", text: "Select Documents"},
+        // { value: "", text: "Select Documents"},
         {value: "aadharCard", text:"Aadhar Card"},
         { value: "birthCert", text:"Birth Certificate + Photo ID"},
         { value: "panCard", text:"PAN Card"},
         { value: "passport", text:"Passport"},
       ],
       stateOptions: [
-        { value: "", text: "Select State" },
+        // { value: "", text: "Select State" },
         { value: "a", text: "Maharashtra" },
         { value: "b", text: "Gujrat" },
         { value: "c", text: "Bihar" },
@@ -606,7 +611,7 @@ export default {
         { value: "f", text: "Madya Pradesh" }
       ],
       bankNameOptions:[
-        { value: "", text: "Select Bank Name" },
+        // { value: null, text: "Select Bank Name" },
         { value: "a", text: "Axis Bank" },
         { value: "b", text: "ICICI Bank" },
         { value: "c", text: "HDFC Bank" },
@@ -727,6 +732,9 @@ export default {
    methods: {
      ResetBtn() {
       this.removeText = false;
+    },
+     emailTouch() {
+      this.$v.form.email.$touch();
     },
     onSubmit() {
       this.removeText = true;
