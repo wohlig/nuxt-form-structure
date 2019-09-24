@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="column">
-      <div class="text-left main-form-section mx-5">
+      <div class="text-left main-form-section">
         <b-form name="form">
           <!-- Personal Details -->
           <div class="card inception">
@@ -17,6 +17,7 @@
                   v-model="form.firstName"
                   required
                   placeholder="Enter First Name"
+                   @click="firstNameTouch()"
                 ></b-form-input>
               <div
                 v-if="$v.form.firstName.$error && !$v.form.firstName.required &&
@@ -34,6 +35,7 @@
                 v-model="form.middleName"
                 required
                 placeholder="Enter Last Name"
+                 @click="middleNameTouch()"
               ></b-form-input>
               <div
                 v-if="$v.form.middleName.$error && !$v.form.middleName.required &&
@@ -52,6 +54,7 @@
                 v-model="form.lastName"
                 required
                 placeholder="Enter Last Name"
+                @click="lastNameTouch()"
               ></b-form-input>
               <div
                 v-if="$v.form.lastName.$error && !$v.form.lastName.required &&
@@ -98,7 +101,7 @@
             <b-form-group>
               <div class="row">
                 <div class="col-sm-8 d-flex">
-                  <div class="w-50">
+                  <div class="col-xs-12">
                   <b-form-group
                     class
                     id="calendar"
@@ -120,7 +123,9 @@
                       id="birth-date"
                       input-class="datepicker-input"
                       calendar-class="datepicker-calendar"
+                      @click="dobTouch()"
                       ></datepicker>
+                      <!-- :max-datetime="maxDateTime" -->
                     </no-ssr>
                     <!-- <date-picker
                       v-model="form.dob"
@@ -134,12 +139,12 @@
                     ></date-picker> -->
                   </b-form-group>
                 </div>
-                <div class="ml-4 w-50">
+                <div class="col-xs-12">
                   <b-form-group label="age:" label-for="age">
                     <b-form-input
                       id="age"
                       type="text"
-                      v-model="form.dob"
+                      v-model="form.age"
                       required
                       placeholder="age"
                     ></b-form-input>
@@ -172,6 +177,7 @@
                             v-model="form.password"
                             required
                             placeholder="Minimum 8 Characters"
+                            @click="passwordTouch()"
                           ></b-form-input>
                           <div
                             v-if="$v.form.password.$error && removeText"
@@ -191,6 +197,7 @@
                             v-model="form.confirmPassword"
                             required
                             placeholder="Re-enter Password"
+                            @click="confirmPasswordTouch()"
                           ></b-form-input>
                           <div
                             v-if="$v.form.confirmPassword.$error && removeText"
@@ -220,6 +227,7 @@
                 :minlength="10"
                 required
                 placeholder="Enter Mobile no  "
+                @click="mobileNOTouch()"
               ></b-form-input>
               <div
                 v-if="$v.form.mobileNO.$error && removeText"
@@ -297,6 +305,7 @@
                 label="text"
                 class="v-select"
                 :options="stateOptions"
+                 @click="stateTouch()"
               ></v-select>
               <div
                 v-if="$v.form.state.$error && !$v.form.state.required && removeText"
@@ -313,9 +322,10 @@
                 placeholder="Search or add a tag"
                 label="name"
                 track-by="code"
-                class="w-50 v-select"
+                class="v-select"
                 :options="cityOptions"
                 :multiple="true"
+                @click="cityTouch()"
               ></multiselect>
               <div
                 v-if="$v.form.city.$error && !$v.form.city.required && removeText"
@@ -377,8 +387,7 @@
                   <b-form-file
                     v-model="form.file"
                     :state="Boolean(file)"
-                    placeholder="Choose a file or drop it here..."
-                    drop-placeholder="Drop file here...">
+                    placeholder="Choose a file">
                   </b-form-file>
                   <div
                     v-if="$v.form.file.$error && !$v.form.file.required && removeText"
@@ -563,9 +572,11 @@ import { required, minLength, maxLength ,email, sameAs} from "vuelidate/lib/vali
 export default {
   data() {
     return {
+      // maxDateTime: moment().format(),
       file2: null,
       date:null,
       file:null,
+      value: "",
       show: true,
       removeText: "true",
       errors: [],
@@ -646,14 +657,14 @@ export default {
       },
 
       // custom range shortcuts
-      shortcuts: [
-        {
-          text: "Today",
-          onClick: () => {
-            this.time3 = [new Date(), new Date()];
-          }
-        }
-      ],
+      // shortcuts: [
+      //   {
+      //     text: "Today",
+      //     onClick: () => {
+      //       this.time3 = [new Date(), new Date()];
+      //     }
+      //   }
+      // ],
     };
   },
   validations: {
@@ -686,8 +697,8 @@ export default {
       },
       mobileNO: {
         required,
-        min: minLength(9),
-        max: maxLength(9)
+        min: minLength(10),
+        max: maxLength(10)
       },
       SchoolName:{
         required
@@ -733,8 +744,38 @@ export default {
      ResetBtn() {
       this.removeText = false;
     },
-     emailTouch() {
+    emailTouch() {
       this.$v.form.email.$touch();
+    },
+    firstNameTouch(){
+      this.$v.form.firstName.$touch();
+    },
+    middleNameTouch(){
+      this.$v.form.middleName.$touch();
+    },
+    lastNameTouch(){
+      this.$v.form.lastName.$touch();
+    },
+    dobTouch(){
+      this.$v.form.dob.$touch();
+    },
+    passwordTouch(){
+      this.$v.form.password.$touch();
+    },
+    confirmPasswordTouch(){
+      this.$v.form.confirmPassword.$touch();
+    },
+     mobileNOTouch(){
+      this.$v.form.mobileNO.$touch();
+    },
+     confirmPasswordTouch(){
+      this.$v.form.confirmPassword.$touch();
+    },
+    stateTouch(){
+      this.$v.form.state.$touch();
+    },
+    cityTouch(){
+      this.$v.form.city.$touch();
     },
     onSubmit() {
       this.removeText = true;
@@ -859,6 +900,7 @@ export default {
 }
 .column{
   .main-form-section{
+    margin:0 3rem;
      color:$black;
     .card {
       font-size: 1.1rem;
@@ -956,6 +998,39 @@ export default {
         background-color: $btn-upload-green;
         border-color: $btn-upload-green;
       }
+    }
+  }
+}
+/*
+  ##Device = Low Resolution Tablets, Mobiles (Landscape)
+  ##Screen = B/w 481px to 767px
+*/
+
+@media (min-width: 481px) and (max-width: 767px) {
+
+  //CSS
+
+}
+
+/*
+  ##Device = Most of the Smartphones Mobiles (Portrait)
+  ##Screen = B/w 320px to 479px
+*/
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .animated-scrolling-function-one,.animated-scrolling-function-two,.animated-scrolling-function-three,.animated-scrolling-function-four,.animated-scrolling-function-five {
+    -webkit-animation: ps 50s infinite;
+    animation: ps 50s infinite;
+}
+  .form-control {
+    width: 100%;
+  }
+  .v-select {
+    width: 100%;
+  }
+  .column{
+    .main-form-section{
+      margin:0rem;
     }
   }
 }
